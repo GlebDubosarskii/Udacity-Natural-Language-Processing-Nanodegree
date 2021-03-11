@@ -1,6 +1,4 @@
-
-
-![_example.png](https://github.com/GlebDubosarskii/Udacity-Natural-Language-Processing-Nanodegree/blob/main/Project%201%20Part%20of%20Speech%20Tagging/_example.png?raw=true)
+![Hidden Markov Model](https://devopedia.org/images/article/214/4159.1567702081.jpg)
 
 
 
