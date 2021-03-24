@@ -9,7 +9,7 @@ In this notebook, I build a deep neural network that functions as part of an end
 
 ![ASR Pipeline][image1]
 
-The algorithm first converts any raw audio to feature representations that are commonly used for ASR. After that, the neural networks map these audio features to transcribed text.  I implement state-of-the-art model including convolutional, max pooling, and bidirectional RNN layers, as well as several simpler models. 
+The algorithm first converts any raw audio to feature representations that are commonly used for ASR. After that, the neural networks map these audio features to transcribed text.  I implement state-of-the-art model including convolutional, max pooling, batch normalization, dropout, and bidirectional RNN layers, as well as several simpler models. 
 
 ## Project Instructions
 

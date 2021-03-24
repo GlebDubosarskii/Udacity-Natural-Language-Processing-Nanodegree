@@ -172,22 +172,32 @@ def final_model(input_dim, conv_border_mode, units, output_dim=29):
     max_pool_2 = MaxPooling1D(pool_size=3, strides=1, padding='same',
                             name='maxpool_1d_2')(conv_1d_2)
     
+    bn_cnn = BatchNormalization(name='batch_norm_cnn')(max_pool_2)
+    
     #bidirectional rnn
     bidir_rnn_1 = Bidirectional(GRU(units, activation='relu',
-        return_sequences=True, implementation=2, name='bidirectional_rnn_1'))(max_pool_2)
+        return_sequences=True, implementation=2, dropout=0.2, name='bidirectional_rnn_1'))(bn_cnn)
     
     # batch normalization
     bn_rnn_1 = BatchNormalization(name='batch_norm_1')(bidir_rnn_1)
     
     #bidirectional rnn 2
     bidir_rnn_2 = Bidirectional(GRU(units, activation='relu',
-        return_sequences=True, implementation=2, name='bidirectional_rnn_2'))(bn_rnn_1)
+        return_sequences=True, implementation=2, dropout=0.2, name='bidirectional_rnn_2'))(bn_rnn_1)
     
     # batch normalization 2 
     bn_rnn_2 = BatchNormalization(name='batch_norm_2')(bidir_rnn_2)
     
+    #bidirectional rnn 3
+    bidir_rnn_3 = Bidirectional(GRU(units, activation='relu',
+        return_sequences=True, implementation=2, dropout=0.2, name='bidirectional_rnn_3'))(bn_rnn_2)
+    
+    # batch normalization 3 
+    bn_rnn_3 = BatchNormalization(name='batch_norm_3')(bidir_rnn_3)
+    
+    
     #TimeDistributed layer
-    time_dense = TimeDistributed(Dense(output_dim))(bn_rnn_2)
+    time_dense = TimeDistributed(Dense(output_dim))(bn_rnn_3)
     
     # TODO: Add softmax activation layer
     y_pred = Activation('softmax', name='softmax')(time_dense)
